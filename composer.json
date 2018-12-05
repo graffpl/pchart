@@ -1,0 +1,7 @@
+{
+    "name": "graffpl/pchart",
+    "description": "A fork of the popular pChart library.",
+    "autoload": {
+    	"classmap": ["src/"]
+    }
+}
