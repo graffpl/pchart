@@ -239,8 +239,10 @@ class pChart
 	{
 		$this->FontName = $FontName;
 		$this->FontSize = $FontSize;
-	}
+    }
+    
 
+    
 	/**
 	 * Set the shadow properties
 	 * 
