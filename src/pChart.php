@@ -239,10 +239,8 @@ class pChart
 	{
 		$this->FontName = $FontName;
 		$this->FontSize = $FontSize;
-    }
-    
+	}
 
-    
 	/**
 	 * Set the shadow properties
 	 * 
@@ -554,8 +552,8 @@ class pChart
 
 		if ($this->VMin == NULL && $this->VMax == NULL) {
 			if (isset($DataDescription["Values"][0])) {
-				$this->VMin = $Data[0][$DataDescription["Values"][0]];
-				$this->VMax = $Data[0][$DataDescription["Values"][0]];
+				$this->VMin = $Data[0][$DataDescription["Values"][0]] ?? 0;
+				$this->VMax = $Data[0][$DataDescription["Values"][0]] ?? 0;
 			}
 			else {
 				$this->VMin = 2147483647;
@@ -4451,7 +4449,7 @@ class pChart
 			}
 		}
 
-		if (max($DataSummary) == 0)
+		if (empty($DataSummary) || max($DataSummary) == 0)
 			$this->Errors[] = "[Warning] " . $FunctionName . " - No data set.";
 
 		foreach ($DataSummary as $key => $Value) {

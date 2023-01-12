@@ -74,7 +74,7 @@ class pData
 				$buffer = fgets($handle, 4096);
 				$buffer = str_replace(chr(10), "", $buffer);
 				$buffer = str_replace(chr(13), "", $buffer);
-				$Values = split($Delimiter, $buffer);
+				$Values = explode($Delimiter, $buffer);
 
 				if ($buffer != "") {
 					if ($HasHeader == TRUE && $HeaderParsed == FALSE) {
@@ -128,19 +128,22 @@ class pData
 			}
 		}
 
-		if (count($Value) == 1) {
-			$this->Data[$ID][$Serie] = $Value;
-			if ($Description != "")
-				$this->Data[$ID]["Name"] = $Description;
-			elseif (!isset($this->Data[$ID]["Name"]))
-				$this->Data[$ID]["Name"] = $ID;
-		}
-		else {
-			foreach ($Value as $Val) {
-				$this->Data[$ID][$Serie] = $Val;
-				if (!isset($this->Data[$ID]["Name"]))
+		if (is_array($Value))
+		{
+			if (count($Value) == 1) {
+				$this->Data[$ID][$Serie] = $Value;
+				if ($Description != "")
+					$this->Data[$ID]["Name"] = $Description;
+				elseif (!isset($this->Data[$ID]["Name"]))
 					$this->Data[$ID]["Name"] = $ID;
-				$ID++;
+			}
+			else {
+				foreach ($Value as $Val) {
+					$this->Data[$ID][$Serie] = $Val;
+					if (!isset($this->Data[$ID]["Name"]))
+						$this->Data[$ID]["Name"] = $ID;
+					$ID++;
+				}
 			}
 		}
 	}
